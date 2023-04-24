@@ -489,7 +489,7 @@ cd freepbx
 Then run the installation script...
 
 ```
-cd /opt/app/usr/src/asterisk-18.17.1 &&
+cd /opt/app/usr/src/asterisk-18.* &&
 make basic-pbx &&
 make config &&
 ldconfig &&
