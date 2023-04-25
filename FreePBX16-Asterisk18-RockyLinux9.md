@@ -330,19 +330,42 @@ echo "rungroup = asterisk" >> /etc/asterisk/asterisk.conf
 
 ### 1.3 FreePBX 16 Installation
 
-#### 1.3.1 Install the Latest NodeJS
+#### 1.3.1 Install NodeJS
 
 Rocky Linux 9 comes with NodeJS version 18.
 
 ```
-sudo dnf module list nodejs
+# sudo dnf module list nodejs
 ```
 
-Install NodeJS.
+Refer to https://github.com/nvm-sh/nvm, Install Node Version Manager.
 
 ```
-sudo dnf -y module install nodejs
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 ```
+
+Make sure below is in `/root/.bashrc_profile`.
+
+```
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+```
+
+Install node version 8.17.0
+
+```
+nvm install 8.17.0
+```
+This will install below version respectively.
+
+```
+# node -v
+v8.17.0
+# npm -v
+6.13.4
+```
+
+[Note]: FreePBX is using relatively old NodeJS version, if the latest is used, UCP Daemon error will appear on the dashboard.
 
 #### 1.3.4 Install Apache Web Server
 
