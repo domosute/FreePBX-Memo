@@ -642,8 +642,12 @@ make install && make basic-pbx && make config && ldconfig &&
 chown -R asterisk.asterisk /etc/asterisk /var/{lib,log,spool}/asterisk /usr/lib64/asterisk &&
 # Start asterisk from FreePBX script
 cd /opt/app/usr/src/freepbx &&
-#./start_asterisk kill &&
-./start_asterisk restart &&
+./start_asterisk kill &&
+ps aux | grep asterisk
+```
+Make sure no asterisk is in the process, then proceed.
+```
+./start_asterisk start &&
 ps aux | grep asterisk &&
 # Remove below so that FreePBX installer go through without error.
 rm -f /etc/asterisk/asterisk.conf &&
