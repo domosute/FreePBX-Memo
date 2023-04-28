@@ -670,7 +670,7 @@ rm -f /etc/asterisk/asterisk.conf &&
 ./install -n
 ```
 
-Install all the modules.
+Finally, install all the modules.
 
 ```
 fwconsole ma disablerepo commercial &&
