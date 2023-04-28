@@ -642,7 +642,27 @@ make install && make basic-pbx && make config && ldconfig &&
 chown -R asterisk.asterisk /etc/asterisk /var/{lib,log,spool}/asterisk /usr/lib64/asterisk &&
 # Start asterisk from FreePBX script
 cd /opt/app/usr/src/freepbx &&
-./start_asterisk restart &&
+./start_asterisk kill
+```
+
+Script end the process like below...
+```
+KILLING AMP PROCESSES
+mpg123: no process found
+kill: not enough arguments
+op_server.pl: no process found
+```
+
+Make sure no asterisk is running.
+
+```
+ps aux | grep asterisk
+```
+
+Then run the rest of the script to reinstall FreePBX.
+
+```
+./start_asterisk start &&
 #ps aux | grep asterisk &&
 # Remove below so that FreePBX installer go through without error.
 rm -f /etc/asterisk/asterisk.conf &&
