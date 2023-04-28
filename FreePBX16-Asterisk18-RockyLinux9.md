@@ -59,7 +59,7 @@ SELinux status:                 disabled
 [Note]: In my setup, chan_SIP was firstly deployed so that 5060 and 5061 are assigned for chan_SIP, and 5160 and 5161 are assigned for chan_PJSIP. In recent FreePBX release, these settings are opposite. (5060 & 5061 for chan_PJSIP, and 5160 & 5161 for chan_SIP)
 
 - _80, 443/tcp_: FreePBX administration interface
-- _5060udp_: FreePBX chan_SIP signaling
+- _5060/udp_: FreePBX chan_SIP signaling
 - _5061/tcp_: FreePBX chan_SIP secure signaling
 - _5160/udp: FreePBX chan_PJSIP signaling
 - _5161/tcp: FreePBX chan_PJSIP secure signaling
