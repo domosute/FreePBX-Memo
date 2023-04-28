@@ -331,7 +331,7 @@ echo "rungroup = asterisk" >> /etc/asterisk/asterisk.conf
 ### 1.3 FreePBX 16 Installation
 
 
-#### 1.3.1 Install NodeJS
+#### 1.3.1 Install NodeJS (version 10.24.1)
 
 Rocky Linux 9 comes with NodeJS version 18.
 
