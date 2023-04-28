@@ -21,7 +21,7 @@ Although, Sangoma is not officially releasing the installation procedure for Roc
 
 - **jansson**: version 2.14
 - **php**: version remi-7.4
-- **NodeJS**: version 18.12.1
+- **NodeJS**: version 10.24.1
 - **Asterisk**: version 18.17.0
 - **FreePBX**: version 16.0.40
 
