@@ -73,8 +73,8 @@ firewall-cmd --zone=public --add-port=5060/udp --permanent &&
 firewall-cmd --zone=public --add-port=5061/tcp --permanent &&
 firewall-cmd --zone=public --add-port=5160/udp --permanent &&
 firewall-cmd --zone=public --add-port=5161/tcp --permanent &&
-firewall-cmd --zone=public --add-port=8000/tcp --permanent &&
 firewall-cmd --zone=public --add-port=8001/tcp --permanent &&
+firewall-cmd --zone=public --add-port=8003/tcp --permanent &&
 firewall-cmd --zone=public --add-port=8088-8089/tcp --permanent &&&&
 firewall-cmd --reload
 ```
