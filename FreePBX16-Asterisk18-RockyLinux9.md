@@ -670,6 +670,17 @@ rm -f /etc/asterisk/asterisk.conf &&
 ./install -n
 ```
 
+Install all the modules.
+
+```
+fwconsole ma disablerepo commercial &&
+fwconsole ma installall &&
+fwconsole ma delete firewall &&
+fwconsole chown &&
+fwconsole reload &&
+fwconsole restart
+```
+
 #### 1.3.8 Accessing FreePBX from the Web Browser
 
 Access the host server GUI then set `username`, `password` and `notification email` as requested on the page followed by clicking `set up system` at the bottom right. This will lead to the language selection page, select the language (English) then `submit`. If all goes well, FreePBX login page will show up.
