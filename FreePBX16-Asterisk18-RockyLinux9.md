@@ -526,6 +526,7 @@ Install all FreePBX modules.
 
 ```
 fwconsole ma disablerepo commercial &&
+fwconsole ma enablerepo extended &&
 fwconsole ma installall &&
 fwconsole ma delete firewall &&
 fwconsole chown &&
@@ -674,6 +675,7 @@ Finally, install all the modules.
 
 ```
 fwconsole ma disablerepo commercial &&
+fwconsole ma enablerepo extended &&
 fwconsole ma installall &&
 fwconsole ma delete firewall &&
 fwconsole chown &&
