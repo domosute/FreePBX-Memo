@@ -344,7 +344,7 @@ Rocky Linux 9 comes with NodeJS version 18.
 ```
 sudo dnf module list nodejs
 ```
-But the ucp module will require particular node module. (otherwise UCP Daemon error will appear on the dashboard)    
+But the ucp module will require a particular node module. (otherwise UCP Daemon error will appear on the dashboard)    
 After the try and error, the version **10.24.1** will allow the module to be installed successfully, so specifically install the version.
 
 Do not use dnf to install nodejs, rather use `n` package manager.Refere to https://github.com/tj/n, issue the following.
