@@ -30,7 +30,7 @@ Although, Sangoma is not officially releasing the installation procedure for Roc
 
 #### 1.1.1 Update System Packages
 
-Ensure to update the system package before installation.
+Ensure to update the system packages before installation.
 
 ```
 sudo dnf -y update
