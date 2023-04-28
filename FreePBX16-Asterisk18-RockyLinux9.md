@@ -56,17 +56,23 @@ SELinux status:                 disabled
 
 #### 1.1.3 Firewalld Basic Configuration
 
+[Note]: In my setup, chan_SIP was firstly deployed so that 5060 and 5061 are assigned for chan_SIP, and 5160 and 5161 are assigned for chan_PJSIP. In recent FreePBX release, these settings are opposite. (5060 & 5061 for chan_PJSIP, and 5160 & 5161 for chan_SIP)
+
 - _80, 443/tcp_: FreePBX administration interface
-- _5060-5061/udp_: FreePBX SIP registeration
-- _5160-5161/udp_: FreePBX PJSIP registeration
+- _5060udp_: FreePBX chan_SIP signaling
+- _5061/tcp_: FreePBX chan_SIP secure signaling
+- _5160/udp: FreePBX chan_PJSIP signaling
+- _5161/tcp: FreePBX chan_PJSIP secure signaling
 - _8001, 8003/tcp_: UCP NodeJS Server
 - _8088-8089/tcp_: Asterisk Builtin mini-HTTP server
 
 ```
 firewall-cmd --zone=public --add-port=80/tcp --permanent &&
 firewall-cmd --zone=public --add-port=443/tcp --permanent &&
-firewall-cmd --zone=public --add-port=5060-5061/udp --permanent &&
-firewall-cmd --zone=public --add-port=5160-5161/udp --permanent &&
+firewall-cmd --zone=public --add-port=5060/udp --permanent &&
+firewall-cmd --zone=public --add-port=5061/tcp --permanent &&
+firewall-cmd --zone=public --add-port=5160/udp --permanent &&
+firewall-cmd --zone=public --add-port=5161/tcp --permanent &&
 firewall-cmd --zone=public --add-port=8000/tcp --permanent &&
 firewall-cmd --zone=public --add-port=8001/tcp --permanent &&
 firewall-cmd --zone=public --add-port=8088-8089/tcp --permanent &&&&
