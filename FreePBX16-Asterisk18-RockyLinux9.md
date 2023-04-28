@@ -349,7 +349,7 @@ export N_PREFIX=/usr/local/n &&
 curl -L https://bit.ly/n-install | bash
 ```
 
-After install, install the version **10.24.1**.
+Then, install the version **10.24.1**.
 ```
 n install 10.24.1
 ```
