@@ -2,7 +2,6 @@
 
 ## 0 Preface
 
-Production PBX server is based on CentOS 8 and EOL is already reached (December 31, 2021)  
 This document is the log to denote the software migration process to Rocky Linux 9 based environment.
 
 ### 0.1 Server Environment
