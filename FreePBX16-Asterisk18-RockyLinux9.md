@@ -330,44 +330,37 @@ echo "rungroup = asterisk" >> /etc/asterisk/asterisk.conf
 
 ### 1.3 FreePBX 16 Installation
 
+
 #### 1.3.1 Install NodeJS
 
 Rocky Linux 9 comes with NodeJS version 18.
 
 ```
-# sudo dnf module list nodejs
+sudo dnf module list nodejs
 ```
+But the ucp module will require particular node module. (otherwise UCP Daemon error will appear on the dashboard) After the try and error, the version **10.24.1** will allow the module to be installed successfully, so specifically install the version.
 
-Refer to https://github.com/nvm-sh/nvm, Install Node Version Manager.
-
-```
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
-```
-
-Make sure below is in `/root/.bashrc_profile`.
+Do not use dnf to install nodejs, rather use `n` package manager.Refere to https://github.com/tj/n, issue the following.
 
 ```
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+sudo su &&
+export N_PREFIX=/usr/local/n &&
+curl -L https://bit.ly/n-install | bash
 ```
 
-Install node version 8.17.0
-
+After install, install the version **10.24.1**.
 ```
-nvm install 8.17.0
+n install 10.24.1
 ```
-This will install below version respectively.
 
+Make sure the node version is 10.24.1.
 ```
 # node -v
-v8.17.0
+v10.24.1
 # npm -v
-6.13.4
+6.14.12
 ```
-
-[Note]: FreePBX is using relatively old NodeJS version, if the latest is used, UCP Daemon error will appear on the dashboard.
-
-#### 1.3.4 Install Apache Web Server
+#### 1.3.2 Install Apache Web Server
 
 Install Apache for FreePBX GUI.
 
@@ -386,15 +379,15 @@ sudo firewall-cmd --add-service={http,https} --permanent &&
 sudo firewall-cmd --reload
 ```
 
-#### 1.3.5 Setting Secure Server
+#### 1.3.3 Setting Secure Server
 
-##### 1.3.5.1 Install mod_ssl
+##### 1.3.3.1 Install mod_ssl
 
 ```
 dnf -y install mod_ssl
 ```
 
-##### 1.3.5.2 [Optional]: Modify /etc/httpd/conf.d/ssl.conf File
+##### 1.3.3.2 [Optional]: Modify /etc/httpd/conf.d/ssl.conf File
 
 If the host already have the certificate, set them up.
 Change below parameters. (change `domain.crt` and `domain.key` according to your env.)
@@ -402,13 +395,13 @@ Change below parameters. (change `domain.crt` and `domain.key` according to your
 - _SSLCertificateFile_ /etc/pki/tls/certs/domain.crt
 - _SSLCertificateKeyFile_ /etc/pki/tls/private/domain.key
 
-##### 1.3.5.3 Update CA certificate
+##### 1.3.3.3 Update CA certificate
 
 ```
 update-ca-trust
 ```
 
-##### 1.3.5.4 Create /etc/httpd/conf.d/https_redirect.conf
+##### 1.3.3.4 Create /etc/httpd/conf.d/https_redirect.conf
 
 ```
 tee /etc/httpd/conf.d/https_redirect.conf << EOF
@@ -431,13 +424,13 @@ tee /etc/httpd/conf.d/https_redirect.conf << EOF
 EOF
 ```
 
-##### 1.3.5.5 Restart Apache Server
+##### 1.3.3.5 Restart Apache Server
 
 ```
 systemctl restart httpd.service
 ```
 
-#### 1.3.6 Install PHP (PHP 7.4)
+#### 1.3.4 Install PHP (PHP 7.4)
 
 FreePBX is picky about PHP version. Installing version 7.4.
 
@@ -498,7 +491,7 @@ sudo sed -i 's/\(^group = \).*/\1asterisk/' /etc/php-fpm.d/www.conf &&
 sudo sed -i 's/\(^listen.acl_users = \).*/\1apache,nginx,asterisk/' /etc/php-fpm.d/www.conf
 ```
 
-#### 1.3.7 FreePBX Installation
+#### 1.3.5 FreePBX Installation
 
 Download the latest FreePBX 16 and install.
 
@@ -540,7 +533,7 @@ Restart the Web services.
 sudo systemctl restart httpd php-fpm
 ```
 
-#### 1.3.8 Create FreePBX Systemd Startup script
+#### 1.3.6 Create FreePBX Systemd Startup script
 
 Create a systemd unit for auto-starting the service.
 
@@ -567,7 +560,7 @@ sudo systemctl enable freepbx &&
 sudo systemctl start freepbx
 ```
 
-#### 1.3.9 Check Asterisk CDR Feature
+#### 1.3.6 Check Asterisk CDR Feature
 
 Check the CDR connection is set correctly.
 
@@ -601,7 +594,7 @@ ODBC DSN Settings
     Logging: Disabled
 ```
 
-#### 1.3.10 [Side Note]: Reinstallation Procedure
+#### 1.3.7 [Side Note]: Reinstallation Procedure
 
 [Note]: FreePBX installer is quite fragile and breaks if Asterisk is not running properly.    
 In case if the installation script breaks, uninstall all from the host server and start over again.
@@ -652,6 +645,6 @@ rm -f /etc/asterisk/asterisk.conf &&
 ./install -n
 ```
 
-#### 1.3.11 Accessing FreePBX from the Web Browser
+#### 1.3.8 Accessing FreePBX from the Web Browser
 
 Access host server GUI then set `username`, `password` and `notification email` as requested on the page followed by clicking `set up system` at the bottom right. This will lead to the language selection page, select the language (English) then `submit`. If all goes well, FreePBX login page will show up.
