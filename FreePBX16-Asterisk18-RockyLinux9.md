@@ -61,8 +61,8 @@ SELinux status:                 disabled
 - _80, 443/tcp_: FreePBX administration interface
 - _5060/udp_: FreePBX chan_SIP signaling
 - _5061/tcp_: FreePBX chan_SIP secure signaling
-- _5160/udp: FreePBX chan_PJSIP signaling
-- _5161/tcp: FreePBX chan_PJSIP secure signaling
+- _5160/udp_: FreePBX chan_PJSIP signaling
+- _5161/tcp_: FreePBX chan_PJSIP secure signaling
 - _8001, 8003/tcp_: UCP NodeJS Server
 - _8088-8089/tcp_: Asterisk Builtin mini-HTTP server
 
