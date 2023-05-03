@@ -657,14 +657,15 @@ op_server.pl: no process found
 Make sure no asterisk is running.
 
 ```
+cd /opt/app/usr/src/freepbx &&
 ps aux | grep asterisk
 ```
 
 Then run the rest of the script to reinstall FreePBX.
 
 ```
+cd /opt/app/usr/src/freepbx &&
 ./start_asterisk start &&
-#ps aux | grep asterisk &&
 # Remove below so that FreePBX installer go through without error.
 rm -f /etc/asterisk/asterisk.conf &&
 # Finally start the installation
