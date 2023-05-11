@@ -36,6 +36,10 @@ Ensure to update the system packages before installation.
 sudo dnf -y update
 ```
 
+[Note]: Remove below since asterisk will stop with error
+```
+dnf remove -y libsrtp libsrtp-devel
+```
 #### 1.1.2 Disable SELINUX
 
 FreePBX require SELINUX to be disabled. Once disabled, reboot the server.
