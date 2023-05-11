@@ -492,7 +492,7 @@ Set the max upload size for php to 120M.
 sudo sed -i 's/\(^upload_max_filesize = \).*/\120M/' /etc/php.ini
 ```
 
-Then, enable and start `php-fpm` PHP-FPM (FastCGI Process Manager) service.
+Then, enable and start `php-fpm` PHP-FPM (**F**astCGI **P**rocess **M**anager) service.
 
 ```
 systemctl enable php-fpm &&
