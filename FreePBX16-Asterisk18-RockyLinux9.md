@@ -78,7 +78,7 @@ firewall-cmd --zone=public --add-port=5160/udp --permanent &&
 firewall-cmd --zone=public --add-port=5161/tcp --permanent &&
 firewall-cmd --zone=public --add-port=8001/tcp --permanent &&
 firewall-cmd --zone=public --add-port=8003/tcp --permanent &&
-firewall-cmd --zone=public --add-port=8088-8089/tcp --permanent &&&&
+firewall-cmd --zone=public --add-port=8088-8089/tcp --permanent &&
 firewall-cmd --reload
 ```
 
@@ -122,7 +122,9 @@ sudo systemctl enable --now mariadb
 Then, secure the MariaDB.
 
 ```
-sudo mysql_secure_installation
+sudo su
+cd ~
+mysql_secure_installation
   Switch to unix_socket authentication [Y/n] n
   Change the root password? [Y/n] n
   Remove anonymous users? [Y/n] Y
@@ -147,7 +149,7 @@ sudo dnf -y install mariadb-connector-odbc
 
 ##### 1.1.6.3 Configure ODBC and the MariaDB ODBC connector
 
-FreePBX 16 will install `/etc/asterisk/res_odbc_additional.conf later and it looks like below.
+FreePBX 16 will install `/etc/asterisk/res_odbc_additional.conf` later and it looks like below.
 
 ```
 ;--------------------------------------------------------------------------------;
@@ -260,7 +262,7 @@ make menuselect
 
 - When the menu pops up, install system message audio data (Core Sound Files) other than wav formats, (otherwise no message would heard from phoneset.)
   After selecting 'Save & Exit' continue for installation.
-- Since Asterisk 18 deplicated app_macro.so, but FreePBX still uses it, it has to be selected in menuselect.
+- Since Asterisk 18 deplicated `app_macro.so`, but FreePBX still uses it, it has to be selected.
 
 ```
 Add-ons (See README-addons.txt)
@@ -297,7 +299,8 @@ make &&
 make install
 ```
 
-Once the installation is finished, the dummy configuration has to be generated for seemless FreePBX installation. To perform `make config`, `chkconfig` package needs to be installed for RL9, (RL8 has it installed by default).
+Once the installation is finished, the dummy configuration has to be generated for seemless FreePBX installation.    
+To perform `make config`, `chkconfig` package needs to be installed for RL9, (RL8 has it installed by default).
 
 ```
 mv /etc/init.d /tmp &&
@@ -325,8 +328,7 @@ sudo chown -R asterisk.asterisk /etc/asterisk /var/{lib,log,spool}/asterisk /usr
 mkhomedir_helper asterisk
 ```
 
-[Note]:
-`mkhomedir_helper` command will ensure the asterisk home directory is under `/opt/app/home/asterisk`.
+[Note]: `mkhomedir_helper` command will ensure the asterisk home directory is under `/opt/app/home/asterisk`.
 
 Add below to make sure the process is run by `asterisk` user.
 
@@ -338,7 +340,6 @@ echo "rungroup = asterisk" >> /etc/asterisk/asterisk.conf
 ```
 
 ### 1.3 FreePBX 16 Installation
-
 
 #### 1.3.1 Install NodeJS (version 10.24.1)
 
@@ -370,6 +371,12 @@ v10.24.1
 # npm -v
 6.14.12
 ```
+
+[Note]: Set the symbolic link to suppress the node error when the dashboard is opened...
+```
+sudo ln -s /usr/local/n/bin/node /usr/bin/node
+```
+
 #### 1.3.2 Install Apache Web Server
 
 Install Apache for FreePBX GUI.
@@ -391,13 +398,13 @@ sudo firewall-cmd --reload
 
 #### 1.3.3 Setting Secure Server
 
-##### 1.3.3.1 Install mod_ssl
+##### 1.3.3.1 Install `mod_ssl`
 
 ```
 dnf -y install mod_ssl
 ```
 
-##### 1.3.3.2 [Optional]: Modify /etc/httpd/conf.d/ssl.conf File
+##### 1.3.3.2 [Optional]: Modify `/etc/httpd/conf.d/ssl.conf` File
 
 If the host already have the certificate, set them up.
 Change below parameters. (change `domain.crt` and `domain.key` according to your env.)
@@ -411,7 +418,7 @@ Change below parameters. (change `domain.crt` and `domain.key` according to your
 update-ca-trust
 ```
 
-##### 1.3.3.4 Create /etc/httpd/conf.d/https_redirect.conf
+##### 1.3.3.4 Create `/etc/httpd/conf.d/https_redirect.conf`
 
 ```
 tee /etc/httpd/conf.d/https_redirect.conf << EOF
